@@ -1,13 +1,4 @@
-import { Card, CardBack } from "@/components/ui/card";
-import { FlipCard } from "@/components/ui/flip-card";
-import type { TelemetryData } from "@/components/ui/telemetry";
-
-type CarCard = {
-  title: string;
-  subtitle: string;
-  carSrc: string;
-  telemetry: TelemetryData;
-};
+import { Gallery, type CarCard } from "@/components/ui/gallery";
 
 const CARS: CarCard[] = [
   {
@@ -85,34 +76,5 @@ const CARS: CarCard[] = [
 ];
 
 export default function Home() {
-  return (
-    <main className="min-h-screen bg-linear-to-b from-zinc-900 to-black px-6 py-12">
-      <header className="mx-auto mb-10 max-w-7xl">
-        <h1 className="font-mono text-3xl font-bold uppercase tracking-[0.25em] text-white">
-          Telemetry Cards
-        </h1>
-        <p className="mt-1 font-mono text-sm text-white/50">
-          {CARS.length} cars · demo collection
-        </p>
-      </header>
-
-      <div className="mx-auto grid max-w-7xl grid-cols-1 justify-items-center gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-        {CARS.map((car, i) => (
-          <FlipCard
-            key={i}
-            front={
-              <Card
-                title={car.title}
-                subtitle={car.subtitle}
-                carSrc={car.carSrc}
-                telemetry={car.telemetry}
-                track={i}
-              />
-            }
-            back={<CardBack label={car.title} track={i} />}
-          />
-        ))}
-      </div>
-    </main>
-  );
+  return <Gallery cars={CARS} />;
 }

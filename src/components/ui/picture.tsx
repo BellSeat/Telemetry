@@ -7,6 +7,8 @@ type CardBackgroundProps = {
   carAlt?: string;
   /** Track map index (matches TRACKS) */
   track?: number;
+  /** true = accel/brake heat map, false = white silhouette */
+  colored?: boolean;
 };
 
 /**
@@ -17,6 +19,7 @@ export function CardBackground({
   carSrc,
   carAlt = "Rally car",
   track = 0,
+  colored = true,
 }: CardBackgroundProps) {
   return (
     <div className="absolute inset-0">
@@ -37,8 +40,12 @@ export function CardBackground({
       {/* 2. Darkening gradient so the telemetry text stays readable */}
       <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/40 to-black/20" />
 
-      {/* 3. Track map (accel/brake coloring), top-right, clear of the bottom-right telemetry */}
-      <TrackMap track={track} className="absolute -right-8 top-5 h-40 w-auto opacity-80" />
+      {/* 3. Track map (accel/brake coloring or white silhouette), top-right, clear of the bottom-right telemetry */}
+      <TrackMap
+        track={track}
+        colored={colored}
+        className="absolute -right-8 top-5 h-40 w-auto text-white opacity-80"
+      />
     </div>
   );
 }
